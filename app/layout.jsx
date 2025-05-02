@@ -9,6 +9,9 @@ const outfit = Outfit({
 export const metadata = {
   title: "Expense Tracker",
   description: "Built with Next.js",
+  icons: {
+    icon: "/logoSmall.svg",
+  },
 };
 
 export default function RootLayout({ children }) {
