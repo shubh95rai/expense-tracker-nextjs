@@ -39,7 +39,7 @@ export default function DashboardHeader() {
           width={0}
           height={0}
           priority
-          className=" w-[24px]"
+          className=" size-7"
         />
       </Link>
 

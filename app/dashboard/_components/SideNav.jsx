@@ -31,16 +31,30 @@ export default function SideNav() {
   const pathname = usePathname();
 
   return (
-    <div className="h-full p-5 border-r shadow">
+    <div className="h-full px-5 py-4 border-r shadow">
       <Link href="/">
-        <Image
+        {/* <Image
           src="/logo.svg"
           alt="Logo"
           width={0}
           height={0}
           priority
           className="ml-4 w-[160px]"
-        />
+        /> */}
+
+        <div className="flex items-center gap-2">
+          <Image
+            src="/logoSmall.svg"
+            alt="Logo"
+            width={0}
+            height={0}
+            priority
+            className=" size-7"
+          />
+          <span className="font-bold text-2xl tracking-tight">
+            Expense <span className="text-indigo-600">Tracker</span>
+          </span>
+        </div>
       </Link>
 
       <div className="mt-8 space-y-2">
