@@ -2,6 +2,7 @@
 
 import { createBudget } from "@/actions/actions";
 import LoadingButton from "@/app/_components/LoadingButton";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -10,12 +11,15 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import EmojiPicker from "emoji-picker-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
 export default function CreateBudget({ refreshData }) {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
+  const [emojiIcon, setEmojiIcon] = useState("😄");
+  const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -26,7 +30,7 @@ export default function CreateBudget({ refreshData }) {
     }
 
     setLoading(true);
-    const result = await createBudget(name, amount);
+    const result = await createBudget(name, amount, emojiIcon);
 
     if (result) {
       refreshData();
@@ -64,7 +68,26 @@ export default function CreateBudget({ refreshData }) {
           <DialogHeader>
             <DialogTitle>Create New Budget</DialogTitle>
             <DialogDescription asChild>
-              <div className="mt-4 space-y-4">
+              <div className="mt-4 space-y-4 text-left">
+                <Button
+                  className="text-xl"
+                  variant="outline"
+                  onClick={() => {
+                    setOpenEmojiPicker(true);
+                  }}
+                >
+                  {emojiIcon}
+                </Button>
+                <div className="absolute">
+                  <EmojiPicker 
+                    open={openEmojiPicker}
+                    onEmojiClick={(e) => {
+                      setOpenEmojiPicker(false);
+                      setEmojiIcon(e.emoji);
+                    }}
+                    width={270}
+                  />
+                </div>
                 <div>
                   <h2 className="font-medium mb-1 text-black">Budget name</h2>
                   <Input

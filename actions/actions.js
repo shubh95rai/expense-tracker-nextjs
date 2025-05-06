@@ -15,11 +15,11 @@ export async function getBudgets() {
   }
 }
 
-export async function createBudget(name, amount) {
+export async function createBudget(name, amount, emojiIcon) {
   try {
     const result = await db
       .insert(budgets)
-      .values({ name, amount })
+      .values({ name, amount, icon: emojiIcon })
       .returning({ insertedId: budgets.id });
 
     return result;
@@ -143,11 +143,11 @@ export async function deleteBudget(budgetId) {
   }
 }
 
-export async function updateBudget(budgetId, name, amount) {
+export async function updateBudget(budgetId, name, amount, emojiIcon) {
   try {
     const result = await db
       .update(budgets)
-      .set({ name, amount })
+      .set({ name, amount, icon: emojiIcon })
       .where(eq(budgets.id, budgetId))
       .returning();
 

@@ -14,9 +14,14 @@ export default function BudgetItem({ budget }) {
     <Link href={`/dashboard/expenses/${budget?.id}`}>
       <div className="p-5 rounded-md border space-y-4 hover:shadow-md cursor-pointer">
         <div className="flex items-center justify-between">
-          <div>
-            <h2 className="font-bold">{budget.name}</h2>
-            <h2 className="text-gray-500">{budget.totalItem} Item</h2>
+          <div className="flex items-center gap-2">
+            <div className="p-2 text-xl bg-slate-100 rounded-full">
+              {budget.icon}
+            </div>
+            <div>
+              <h2 className="font-semibold">{budget.name}</h2>
+              <h2 className="text-gray-500 text-sm">{budget.totalItem} Item</h2>
+            </div>
           </div>
           <div>
             <h2 className="text-lg text-indigo-600 font-bold">

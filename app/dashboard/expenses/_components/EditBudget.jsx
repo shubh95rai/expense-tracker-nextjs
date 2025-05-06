@@ -14,10 +14,13 @@ import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { updateBudget } from "@/actions/actions";
+import EmojiPicker from "emoji-picker-react";
 
 export default function EditBudget({ budgetInfo, refreshData }) {
   const [name, setName] = useState(budgetInfo?.name);
   const [amount, setAmount] = useState(budgetInfo?.amount);
+  const [emojiIcon, setEmojiIcon] = useState(budgetInfo?.icon);
+  const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -28,7 +31,7 @@ export default function EditBudget({ budgetInfo, refreshData }) {
     }
 
     setLoading(true);
-    const result = await updateBudget(budgetInfo.id, name, amount);
+    const result = await updateBudget(budgetInfo.id, name, amount, emojiIcon);
 
     if (result) {
       refreshData();
@@ -47,6 +50,7 @@ export default function EditBudget({ budgetInfo, refreshData }) {
     if (budgetInfo) {
       setName(budgetInfo?.name);
       setAmount(budgetInfo?.amount);
+      setEmojiIcon(budgetInfo?.icon);
     }
   }, [budgetInfo]);
 
@@ -74,7 +78,26 @@ export default function EditBudget({ budgetInfo, refreshData }) {
           <DialogHeader>
             <DialogTitle>Update Budget</DialogTitle>
             <DialogDescription asChild>
-              <div className="mt-4 space-y-4">
+              <div className="mt-4 space-y-4 text-left">
+                <Button
+                  className="text-xl"
+                  variant="outline"
+                  onClick={() => {
+                    setOpenEmojiPicker(true);
+                  }}
+                >
+                  {emojiIcon}
+                </Button>
+                <div className="absolute">
+                  <EmojiPicker
+                    open={openEmojiPicker}
+                    onEmojiClick={(e) => {
+                      setOpenEmojiPicker(false);
+                      setEmojiIcon(e.emoji);
+                    }}
+                    width={270}
+                  />
+                </div>
                 <div>
                   <h2 className="font-medium mb-1 text-black">Budget name</h2>
                   <Input
