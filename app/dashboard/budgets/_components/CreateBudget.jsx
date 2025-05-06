@@ -73,13 +73,13 @@ export default function CreateBudget({ refreshData }) {
                   className="text-xl"
                   variant="outline"
                   onClick={() => {
-                    setOpenEmojiPicker(true);
+                    setOpenEmojiPicker(!openEmojiPicker);
                   }}
                 >
                   {emojiIcon}
                 </Button>
                 <div className="absolute">
-                  <EmojiPicker 
+                  <EmojiPicker
                     open={openEmojiPicker}
                     onEmojiClick={(e) => {
                       setOpenEmojiPicker(false);

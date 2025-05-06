@@ -83,7 +83,7 @@ export default function EditBudget({ budgetInfo, refreshData }) {
                   className="text-xl"
                   variant="outline"
                   onClick={() => {
-                    setOpenEmojiPicker(true);
+                    setOpenEmojiPicker(!openEmojiPicker);
                   }}
                 >
                   {emojiIcon}
